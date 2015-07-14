@@ -80,10 +80,29 @@ class CalculationsController < ApplicationController
 
     @mean = @sum / @count
 
-    @variance = 
+    @variance = 0
+        @numbers.each do |x|
+        @variance += (x - @mean) ** 2
+    end
+    @variance = @variance / @count
 
-    @standard_deviation = "Replace this string with your answer."
+    @standard_deviation = Math.sqrt(@variance)    
 
-    @mode = "Replace this string with your answer."
+    @mode = 0
+        counter = Hash.new(0)
+        @numbers.each do |x|
+        counter[x] += 1
+    end
+
+    @mode = []
+
+    counter.each do |k,v|
+        if v == counter.values.max
+            @mode &lt;&lt; k
+    end
+end
+
+@mode
+end
   end
 end
