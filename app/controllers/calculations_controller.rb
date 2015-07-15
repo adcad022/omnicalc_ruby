@@ -81,28 +81,24 @@ class CalculationsController < ApplicationController
     @mean = @sum / @count
 
     @variance = 0
-        @numbers.each do |x|
-        @variance += (x - @mean) ** 2
-    end
-    @variance = @variance / @count
+            @numbers.each do |x|
+            @variance += (x - @mean) ** 2
+        end
+        @variance = @variance / @count
 
     @standard_deviation = Math.sqrt(@variance)    
 
-    @mode = 0
-        counter = Hash.new(0)
-        @numbers.each do |x|
-        counter[x] += 1
-    end
-
-    @mode = []
-
-    counter.each do |k,v|
-        if v == counter.values.max
-            @mode &lt;&lt; k
+    @mode = if@numbers.count==1
+        @mode=@numbers[0]
+    else
+        counts = Hash.new(0)
+        @sorted_numbers.each do |nums|
+            counts[nums] += 1
+        end
+        @mode = counts.key(counts.values.max)
     end
 end
+end
 
-@mode
-end
-  end
-end
+
+
