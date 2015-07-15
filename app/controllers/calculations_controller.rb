@@ -80,11 +80,13 @@ class CalculationsController < ApplicationController
 
     @mean = @sum / @count
 
-    @variance = 0
-            @numbers.each do |x|
+    @variance = 0             
+
+    @numbers.each do |x|
             @variance += (x - @mean) ** 2
         end
         @variance = @variance / @count
+        
 
     @standard_deviation = Math.sqrt(@variance)    
 
